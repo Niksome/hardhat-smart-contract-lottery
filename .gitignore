@@ -2,6 +2,6 @@
 .prettierrc
 node_modules
 artifacts
-chache
+cache
 coverage.json
 coverage
