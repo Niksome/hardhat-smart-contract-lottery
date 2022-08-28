@@ -36,7 +36,7 @@ developmentChains.includes(network.name)
                                   winnerEndingBalance.toString(),
                                   winnerStartingBalance.add(raffleEntranceFee).toString()
                               )
-                              expect(endingTimeStamp).to.be.greaterThan(startingTimeStamp)
+                              assert(endingTimeStamp > startingTimeStamp)
                               resolve()
                           } catch (error) {
                               console.log(error)
@@ -44,7 +44,8 @@ developmentChains.includes(network.name)
                           }
                       })
                       //entering the raffle
-                      await raffle.enterRaffle({ value: raffleEntranceFee })
+                      const tx = await raffle.enterRaffle({ value: raffleEntranceFee })
+                      await tx.wait(2)
                       const winnerStartingBalance = await accounts[0].getBalance()
 
                       //this code won't compile until listiner has finished listening!
